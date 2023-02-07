@@ -7,15 +7,11 @@ is 0 or not.
 
 ```bash
 /workspace/fastmod # iverilog fastmod.vl
-fastmod.vl:33: warning: Port 1 (n) of fastmod expects 16 bits, got 8.
-fastmod.vl:33:        : Padding 8 high bits of the port.
-fastmod.vl:33: warning: Port 2 (d) of fastmod expects 16 bits, got 8.
-fastmod.vl:33:        : Padding 8 high bits of the port.
 /workspace/fastmod # ./a.out
-n:  75  d:  5   r:                   0
-n:  75  d:  4   r:                   3
-n:  75  d:  3   r:                   0
-n:  75  d:  2   r:                   1
+n:    75        d:    5 r:                   0
+n:    75        d:    4 r:                   3
+n:    75        d:    3 r:                   0
+n:    75        d:    2 r:                   1
 fastmod.vl:50: $finish called at 22 (1s)
 ```
 

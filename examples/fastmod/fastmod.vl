@@ -26,8 +26,8 @@ endmodule
 
 module td;
     reg clk;
-    reg [7:0] n;
-    reg [7:0] d;
+    reg [15:0] n;
+    reg [15:0] d;
     wire [63:0] r;
 
     fastmod fmod(.n(n), .d(d), .r(r));
