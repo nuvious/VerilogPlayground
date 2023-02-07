@@ -32,3 +32,4 @@ Hello, World
 - [Simple N-bit counter](examples/counter/README.md)
 - [Naive integer division](examples/division/README.md)
 - [Fastmod implementation](examples/fastmod/README.md)
+- [Bhaskara sin approximation](examples/bhaskara_sin/README.md)
