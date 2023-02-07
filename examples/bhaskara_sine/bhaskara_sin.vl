@@ -1,0 +1,46 @@
+`define PI 3.14159265359
+module bhaskara_sin(
+    input real theta,
+    output real sin
+);
+    function real sin_func;
+        input real x;
+        real numerator;
+        real denominator;
+
+        begin
+            numerator = `PI;
+            numerator = 16 * x * (`PI - x);
+            denominator = (5 * `PI * `PI) - (4 * x * (`PI - x));
+            sin_func = numerator / denominator;
+        end
+    endfunction
+
+    always @ * begin
+        sin = sin_func(theta);
+    end
+endmodule
+
+module td;
+    reg clk;
+    real theta;
+    wire real sin;
+
+    bhaskara_sin bsin(.theta(theta), .sin(sin));
+
+    always #2 clk = ~clk;
+
+    initial begin
+        #2 theta <= 0;
+        #2 $display("theta: %.16g\tsin: %.16g", theta, sin);
+        #2 theta <= 0.785398163; // pi/4
+        #2 $display("theta: %.16g\tsin: %.16g", theta, sin);
+        #2 theta <= 1.570796327; // pi/2
+        #2 $display("theta: %.16g\tsin: %.16g", theta, sin);
+        #2 theta <= 2.35619449; // 3pi/4
+        #2 $display("theta: %.16g\tsin: %.16g", theta, sin);
+        #2 theta <= 3.141592654; // pi
+        #2 $display("theta: %.16g\tsin: %.16g", theta, sin);
+        #2 $finish;
+    end
+endmodule
