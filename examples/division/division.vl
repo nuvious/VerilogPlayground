@@ -13,15 +13,15 @@ module division (
     always @( posedge clk ) begin
         $display("rst: %d\tcomp: %d", rst, comp);
         if ( rst ) begin
-            Q = 0; //initial assignment
-            R = N;
-            comp = 1;
+            Q <= 0;
+            R <= N;
+            comp <= 1;
         end else if ( comp && R >= D ) begin
-            Q = Q + 1;
-            R = R - D;
+            Q <= Q + 1;
+            R <= R - D;
             $display("%d, %d, %d, %d", N, D, Q, R);
         end else if ( comp && R < D ) begin
-            comp = 0;
+            comp <= 0;
         end
     end
 endmodule
