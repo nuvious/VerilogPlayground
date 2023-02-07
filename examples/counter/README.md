@@ -1,4 +1,4 @@
-# Simple N-Bit Counter
+# Simple N-Bit Counter Example
 
 [counter.vl](counter.vl) is adapted from the [ChipVerify 4-bit counter example](https://www.chipverify.com/verilog/verilog-4-bit-counter).
 
