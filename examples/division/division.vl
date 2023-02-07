@@ -1,0 +1,66 @@
+// Math referenced from https://en.wikipedia.org/wiki/HSL_and_HSV on 2023/02/06
+
+module division (
+    input clk,
+    input rst,
+    input [15:0]N,
+    input [15:0]D,
+    output reg comp,
+    output reg[15:0] Q,
+    output reg[15:0] R
+);
+
+    always @( posedge clk ) begin
+        $display("rst: %d\tcomp: %d", rst, comp);
+        if ( rst ) begin
+            Q <= 0;
+            R <= N;
+            comp <= 1;
+        end else if ( comp && R >= D ) begin
+            Q <= Q + 1;
+            R <= R - D;
+            $display("%d, %d, %d, %d", N, D, Q, R);
+        end else if ( comp && R < D ) begin
+            comp <= 0;
+        end
+    end
+endmodule
+
+module td;
+    reg clk;
+    reg rst;
+    reg [15:0] N;
+    reg [15:0] D;
+    wire comp;
+    wire [15:0] Q;
+    wire [15:0] R;
+
+    division d0(
+        .clk(clk),
+        .rst(rst),
+        .N(N),
+        .D(D),
+        .comp(comp),
+        .Q(Q),
+        .R(R)
+    );
+
+
+    always #1 clk = ~clk;
+
+    initial begin
+        clk <= 0;
+        rst <= 1;
+        N = 16'b000001001001; // 73
+        D = 16'b000000001100; // 12
+
+        #2 rst <= 0;
+    end
+
+    always #4 begin
+        if (comp == 0) begin
+            $display("ANSWER: %d R %d", Q, R);
+            #0 $finish;
+        end
+    end
+endmodule

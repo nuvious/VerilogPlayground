@@ -26,3 +26,9 @@ You can then run compilations and executions from the internal shell:
 Hello, World
 /examples/hello.vl:46: $finish called at 0 (1s)
 ```
+
+## Examples
+
+- [Simple N-bit counter](examples\division\README.md)
+- [Naive integer division](examples\division\README.md)
+- [Fastmod implementation](examples\fastmod\README.md)

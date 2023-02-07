@@ -1,0 +1,52 @@
+module fastmod(
+  input wire [15:0] n,
+  input wire [15:0] d,
+  output reg[63:0] r
+);
+
+  function [63:0] fastmod_func;
+    input [15:0] fastmod_n;
+    input [15:0] fastmod_d;
+    reg [31:0] c;
+    reg [31:0] lowbits;
+    begin
+      c = 32'b11111111111111111111111111111111;
+      c = (c / {16'b0000000000000000, fastmod_d}) + 1 + ((fastmod_d & (fastmod_d - 1)) == 0 ? 1 : 0);
+      lowbits = c * fastmod_n;
+      fastmod_func = 
+        {32'b00000000000000000000000000000000, lowbits} * 
+        {32'b00000000000000000000000000000000, fastmod_d} >> 32;
+    end
+  endfunction
+  
+  always @ * begin
+    r = fastmod_func(n, d);
+  end
+endmodule
+
+module td;
+    reg clk;
+    reg [7:0] n;
+    reg [7:0] d;
+    wire [63:0] r;
+
+    fastmod fmod(.n(n), .d(d), .r(r));
+
+    always #2 clk = ~clk;
+
+    initial begin
+        n <= 75;
+        d <= 5;
+        #2 $display("n: %d\td:%d\tr:%d", n, d, r);
+        #2 n <= 75;
+        #2 d <= 4;
+        #2 $display("n: %d\td:%d\tr:%d", n, d, r);
+        #2 n <= 75;
+        #2 d <= 3;
+        #2 $display("n: %d\td:%d\tr:%d", n, d, r);
+        #2 n <= 75;
+        #2 d <= 2;
+        #2 $display("n: %d\td:%d\tr:%d", n, d, r);
+        #2 $finish;
+    end
+endmodule
