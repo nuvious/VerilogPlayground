@@ -29,6 +29,6 @@ Hello, World
 
 ## Examples
 
-- [Simple N-bit counter](examples/division/README.md)
+- [Simple N-bit counter](examples/counter/README.md)
 - [Naive integer division](examples/division/README.md)
 - [Fastmod implementation](examples/fastmod/README.md)
